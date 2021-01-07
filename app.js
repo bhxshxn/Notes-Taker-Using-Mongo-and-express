@@ -4,15 +4,14 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 const viewsPath = path.join(__dirname, './views');
 const mongoose = require('mongoose');
-const cookieSession = require("cookie-session");
-
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 //session
-app.use(
-    cookieSession({
-        keys: ["randomStringASyoulikehjudfsajk"],
-    })
-);
+app.use(session({
+    secret: 'keyboard cat',
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}))
 
 // view engine
 app.set("view engine", "ejs");
