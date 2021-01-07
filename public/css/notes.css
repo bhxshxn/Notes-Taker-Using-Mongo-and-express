@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Create four equal columns that floats next to each other */
+.column1 {
+    float: left;
+    width: 28%;
+    height: 90vh; /* Should be removed. Only for demonstration */
+    border-right: 2px solid grey;
+  }
+
+.column2 {
+    float: left;
+    width: 70%;
+    height: 90vh; /* Should be removed. Only for demonstration */
+  }
+
+input,textarea{
+    border: none !important;
+    border-color: transparent !important;
+  }
+input:focus,textarea:focus{
+    border: none !important;
+    border-color: transparent !important;
+  }
+form{
+      margin-top: 20px;
+    }
+.icons button{
+  font-size: 30px; 
+  float: right;
+}
+
+.alert{
+ font-size: 20px;
+ line-height: 20px;
+}
+
+.each a{
+  color: black;
+}
+  
+.each a:hover{
+  text-decoration: none;
+}
