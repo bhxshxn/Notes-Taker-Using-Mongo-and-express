@@ -31,14 +31,18 @@
                                                         <%for(var i=0;i<note.length;i++){%>
                                                             <%if(note[i].user===user){%>
                                                                 <div class="each">
-                                                                    <a href="">
-                                                                        <div class="alert alert-light" role="alert">
-                                                                            <%=note[i].title%><a
+
+                                                                    <div class="alert alert-light" role="alert">
+                                                                        <%=note[i].title%>
+                                                                            <div class="icon" style="float: right;"> <a
+                                                                                    href="/user/edit/<%=note[i].id%>"><i
+                                                                                        class="far fa-edit"></i></a><a
                                                                                     href="/user/delete/<%=note[i].id%>"><i
-                                                                                        style="float: right;"
-                                                                                        class="fas fa-trash"></i></a>
-                                                                        </div>
-                                                                    </a>
+                                                                                        class="fas fa-trash"
+                                                                                        style="margin-left: 10px;"></i></a>
+                                                                            </div>
+                                                                    </div>
+
                                                                 </div>
                                                                 <%}%>
                                                                     <%}%>
@@ -50,14 +54,15 @@
                                                                                 <%}%>
                     </div>
                     <div class="column2">
+
                         <form method="Post" action="/user/save">
                             <div class="form-group">
                                 <input type="text" class="form-control mt-10" id="title" placeholder="Add title"
-                                    name="title" required>
+                                    name="title" required value="<%if(each){%><%=each.title%><%}%>">
                             </div>
                             <div class="form-group">
                                 <textarea style="resize: none;" class="form-control" id="note" rows="10"
-                                    placeholder="Note" name="note" required></textarea>
+                                    placeholder="Note" name="note" required><%if(each){%><%=each.note%><%}%></textarea>
                             </div>
                             <div class="icons">
                                 <button type="submit" class="btn "><i class="fas fa-save"></i></button>
@@ -66,48 +71,52 @@
                     </div>
                 </div>
                 <%}else{%>
-                    <%=console.log(notes)%>
-                        <div class="box">
-                            <div class="column1">
-                                <%if(!notes){%>
-                                    <div class="alert alert-light" role="alert">
-                                        No notes
-                                    </div>
-                                    <%}else{%>
-                                        <%for(var i=0;i<notes.length;i++){%>
-                                            <div class="each">
-                                                <a href="">
-                                                    <div class="alert alert-light" role="alert">
-                                                        <%=notes[i].title%><a href="/user/delete/"><i
-                                                                    style="float: right;" class="fas fa-trash"></i></a>
+                    <div class="box">
+                        <div class="column1">
+                            <%if(!notes){%>
+                                <div class="alert alert-light" role="alert">
+                                    No notes
+                                </div>
+                                <%}else{%>
+                                    <%for(var i=0;i<notes.length;i++){%>
+                                        <div class="each">
+
+                                            <div class="alert alert-light" role="alert">
+                                                <%=notes[i].title%>
+                                                    <div class="icon" style="float: right;"><a
+                                                            href="/user/edit/<%=notes.title%>"><i
+                                                                class="far fa-edit"></i></a><a
+                                                            href="/user/delete/<%=notes.title%>"><i class="fas fa-trash"
+                                                                style="margin-left: 10px;"></i></a>
                                                     </div>
-                                                </a>
                                             </div>
 
-                                            <%}%>
+                                        </div>
 
-                                                <%}%>
-                            </div>
-                            <div class="column2">
-                                <form method="Post" action="/user/save">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control mt-10" id="title" placeholder="Add title"
-                                            name="title" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea style="resize: none;" class="form-control" id="note" rows="10"
-                                            placeholder="Note" name="note" required></textarea>
-                                    </div>
-                                    <div class="icons">
-                                        <button type="submit" class="btn "><i class="fas fa-save"></i></button>
-                                    </div>
-                                </form>
-                            </div>
+                                        <%}%>
+
+                                            <%}%>
                         </div>
-                        <%}%>
-                            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-                            <script
-                                src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+                        <div class="column2">
+                            <form method="Post" action="/user/save">
+                                <div class="form-group">
+                                    <input type="text" class="form-control mt-10" id="title" placeholder="Add title"
+                                        name="title" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea style="resize: none;" class="form-control" id="note" rows="10"
+                                        placeholder="Note" name="note" required></textarea>
+                                </div>
+                                <div class="icons">
+                                    <button type="submit" class="btn "><i class="fas fa-save"></i></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <%}%>
+                        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                        <script
+                            src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -22,26 +22,46 @@ router.get('/delete/:id', async (req, res) => {
     res.redirect('back')
 });
 
+// edit
+router.get('/edit/:id', async (req, res) => {
+    var id = req.params.id;
+    const note = await notes.find({});
+    const result = await notes.findById({ _id: id });
+    res.render('main/notes', { user: req.session.user, note: note, notes: req.session.note, each: result });
+});
 //note save
-router.post('/save', (req, res) => {
-    if (req.session.user) {
-        const { title, note } = req.body;
-        const latestNote = new notes({
-            title, note, user: req.session.user
-        });
-        latestNote.save();
-        res.redirect('back');
+router.post('/save', async (req, res) => {
+    const { title, note } = req.body;
+    let count = 0;
+    var id = " ";
+    const result = await notes.find({});
+    result.forEach(element => {
+        if (element.title === req.body.title) {
+            count++
+            id = element._id;
+        }
+    });
+    if (count > 0) {
+        await notes.findByIdAndUpdate(id, { title: req.body.title, note: req.body.note });
+        res.redirect('/proced');
     } else {
-        const { title, note } = req.body;
-        if (req.session.note) {
-            const item = { title: req.body.title, note: req.body.note }
-            req.session.note.push(item);
-            res.redirect('back');
+        if (req.session.user) {
+            const latestNote = new notes({
+                title, note, user: req.session.user
+            });
+            latestNote.save();
+            res.redirect('/proced');
         } else {
-            req.session.note = [];
-            const item = { title: req.body.title, note: req.body.note }
-            req.session.note.push(item);
-            res.redirect('back');
+            if (req.session.note) {
+                const item = { title: req.body.title, note: req.body.note }
+                req.session.note.push(item);
+                res.redirect('/proced');
+            } else {
+                req.session.note = [];
+                const item = { title: req.body.title, note: req.body.note }
+                req.session.note.push(item);
+                res.redirect('/proced');
+            }
         }
     }
 });

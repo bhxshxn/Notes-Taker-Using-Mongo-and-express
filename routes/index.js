@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 //without login
 router.get('/proced', async (req, res) => {
     const note = await notes.find({});
-    res.render('main/notes', { user: req.session.user, note: note, notes: req.session.note });
+    res.render('main/notes', { user: req.session.user, note: note, notes: req.session.note, each: null });
 });
 
 module.exports = router;
